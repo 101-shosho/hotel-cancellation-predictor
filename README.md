@@ -26,15 +26,9 @@ Last-minute booking cancellations lead to severe revenue loss and operational in
 ## 🛠️ How to Run Locally
 1. Clone this repository:
    ```bash
-   git clone [https://github.com/](https://github.com/)<101-shosho>/hotel-cancellation-project.git
-   cd hotel-cancellation-project
+      git clone https://github.com/101-shosho/hotel-cancellation-predictor.git
+      cd hotel-cancellation-project
 
-   ## 6. Business Insights & Deployment Recommendations
-
-
-
-
-   
 
 ### Core Business Takeaways:
 1. **Lead Time is the Strongest Predictor**: Guests booking more than 90 days in advance account for over 60% of cancellations. Early re-confirmation triggers should be automated for this cohort.
