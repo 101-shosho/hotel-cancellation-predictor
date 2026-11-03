@@ -132,4 +132,4 @@ if submit_button:
     elif risk_score >= 30:
         st.warning("⚠️ **Medium Risk Policy**: Implement partial deposit or request email re-confirmation 48 hours prior.")
     else:
-        st.success("✅ **Low Risk Policy**: Eligible for flexible standard booking with no mandatory advance deposit.")ndatory advance deposit.")Eligible for flexible standard booking with no mandatory advance deposit.")
+        st.success("✅ **Low Risk Policy**: Eligible for flexible standard booking with no mandatory advance deposit.")
