@@ -18,12 +18,11 @@ st.markdown("Predict booking cancellation risks and receive real-time deposit po
 
 @st.cache_resource
 def get_trained_pipeline():
-    # Synthetic baseline representation of the 119K hotel records for reliable online inference
     np.random.seed(42)
-    n = 2000
+    n = 3000
     df = pd.DataFrame({
         'hotel': np.random.choice(['City Hotel', 'Resort Hotel'], n),
-        'lead_time': np.random.exponential(scale=70, size=n),
+        'lead_time': np.random.exponential(scale=90, size=n),
         'arrival_date_week_number': np.random.randint(1, 53, n),
         'arrival_date_day_of_month': np.random.randint(1, 31, n),
         'stays_in_weekend_nights': np.random.choice([0, 1, 2], n),
@@ -47,13 +46,16 @@ def get_trained_pipeline():
         'total_of_special_requests': np.random.choice([0, 1, 2], n, p=[0.6, 0.3, 0.1])
     })
     
-    # Ground-truth cancellation pattern logic
-    risk = (
-        (df['lead_time'] > 80).astype(int) + 
-        (df['deposit_type'] == 'Non Refund').astype(int) * 2 + 
-        (df['previous_cancellations'] > 0).astype(int)
+    # Smooth logistic risk modeling for realistic continuous probabilities
+    logit = (
+        (df['lead_time'] - 70) * 0.015
+        + (df['deposit_type'] == 'Non Refund') * 1.2
+        + (df['previous_cancellations'] > 0) * 0.8
+        - (df['total_of_special_requests'] > 0) * 0.6
+        + np.random.normal(0, 0.5, n)
     )
-    y = (risk >= 1).astype(int)
+    prob_real = 1 / (1 + np.exp(-logit))
+    y = np.random.binomial(1, prob_real)
     
     numeric_features = [
         'lead_time', 'arrival_date_week_number', 'arrival_date_day_of_month',
@@ -80,7 +82,7 @@ def get_trained_pipeline():
                 ('enc', OneHotEncoder(handle_unknown='ignore', sparse_output=False))
             ]), categorical_features)
         ])),
-        ('clf', HistGradientBoostingClassifier(random_state=42))
+        ('clf', HistGradientBoostingClassifier(random_state=42, min_samples_leaf=20))
     ])
     
     pipe.fit(df, y)
