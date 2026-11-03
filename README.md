@@ -3,7 +3,7 @@
 Predicting hotel reservation cancellations to optimize overbooking policies and protect hotel revenue.
 
 ## 🚀 Live Demo
-Try the deployed application here: [Live Web App Link]
+Try the deployed application here: https://hotel-cancellation-predictor-p6hyfkn9bdhyvpxyfwnm6f.streamlit.app/
 
 ---
 
@@ -26,7 +26,7 @@ Last-minute booking cancellations lead to severe revenue loss and operational in
 ## 🛠️ How to Run Locally
 1. Clone this repository:
    ```bash
-   git clone [https://github.com/](https://github.com/)<your-username>/hotel-cancellation-project.git
+   git clone [https://github.com/](https://github.com/)<101-shosho>/hotel-cancellation-project.git
    cd hotel-cancellation-project
 
    ## 6. Business Insights & Deployment Recommendations
